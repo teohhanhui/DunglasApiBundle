@@ -1,8 +1,10 @@
 # Changelog
 
-## 1.0.0 beta 4
+## 2.0.0
 
 * Use string values for `Dunglas\ApiBundle\Doctrine\Orm\Filter\DateFilter` null-management constants
+* Support nested properties in Doctrine filters
+* Add method to avoid naming collision of DQL join alias and bound parameter name
 
 ## 1.0.0 beta 3
 
