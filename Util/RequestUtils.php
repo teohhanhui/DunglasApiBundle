@@ -29,11 +29,10 @@ abstract class RequestUtils
      */
     public static function getFixedRequest(Request $request)
     {
-        $query = self::parseRequestParams($_SERVER['QUERY_STRING']);
+        $query = self::parseRequestParams($request->getQueryString());
         $body = self::parseRequestParams(file_get_contents('php://input'));
-        $cookies = isset($_SERVER['HTTP_COOKIE']) ? self::parseRequestParams($_SERVER['HTTP_COOKIE']) : [];
 
-        return $request->duplicate($query, $body, null, $cookies, null, null);
+        return $request->duplicate($query, $body);
     }
 
     /**

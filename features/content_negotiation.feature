@@ -35,8 +35,8 @@ Feature: Content Negotiation support
         "description": null,
         "dummyDate": null,
         "jsonData": [],
-        "dummy": null,
         "relatedDummy": null,
+        "dummy": null,
         "relatedDummies": [],
         "name_converted": null
     }

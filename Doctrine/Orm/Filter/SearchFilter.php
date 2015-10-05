@@ -31,6 +31,7 @@ class SearchFilter extends AbstractFilter
      * @var string Exact matching.
      */
     const STRATEGY_EXACT = 'exact';
+
     /**
      * @var string The value must be contained in the field.
      */
@@ -52,10 +53,12 @@ class SearchFilter extends AbstractFilter
      * @var IriConverterInterface
      */
     private $iriConverter;
+
     /**
      * @var PropertyAccessorInterface
      */
     private $propertyAccessor;
+
     /**
      * @var RequestStack
      */
@@ -94,9 +97,9 @@ class SearchFilter extends AbstractFilter
 
         foreach ($this->extractProperties($request) as $property => $value) {
             if (
-                !$this->isPropertyEnabled($property)
-                || !$this->isPropertyMapped($property, $resource, true)
-                || null === $value
+                !$this->isPropertyEnabled($property) ||
+                !$this->isPropertyMapped($property, $resource, true) ||
+                null === $value
             ) {
                 continue;
             }
@@ -148,8 +151,7 @@ class SearchFilter extends AbstractFilter
                 $queryBuilder
                     ->join(sprintf('%s.%s', $alias, $association), $associationAlias)
                     ->andWhere(sprintf('%s.id = :%s', $associationAlias, $valueParameter))
-                    ->setParameter($valueParameter, $value)
-                ;
+                    ->setParameter($valueParameter, $value);
             } elseif ($metadata->isCollectionValuedAssociation($field)) {
                 $values = $value;
                 if (!is_array($values)) {
@@ -174,8 +176,7 @@ class SearchFilter extends AbstractFilter
                 $queryBuilder
                     ->join(sprintf('%s.%s', $alias, $association), $associationAlias)
                     ->andWhere(sprintf('%s.id IN (:%s)', $associationAlias, $valuesParameter))
-                    ->setParameter($valuesParameter, $values)
-                ;
+                    ->setParameter($valuesParameter, $values);
             }
         }
     }

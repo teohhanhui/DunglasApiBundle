@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  * @author Théo FIDRY <theo.fidry@gmail.com>
+ * @author Vincent CHALAMON <vincentchalamon@gmail.com>
  */
 class DateFilter extends AbstractFilter
 {
@@ -71,10 +72,10 @@ class DateFilter extends AbstractFilter
         foreach ($this->extractProperties($request) as $property => $values) {
             // Expect $values to be an array having the period as keys and the date value as values
             if (
-                !$this->isPropertyEnabled($property)
-                || !$this->isPropertyMapped($property, $resource)
-                || !$this->isDateField($property, $resource)
-                || !is_array($values)
+                !$this->isPropertyEnabled($property) ||
+                !$this->isPropertyMapped($property, $resource) ||
+                !$this->isDateField($property, $resource) ||
+                !is_array($values)
             ) {
                 continue;
             }
@@ -144,8 +145,7 @@ class DateFilter extends AbstractFilter
         if (null === $nullManagement || self::EXCLUDE_NULL === $nullManagement) {
             $queryBuilder->andWhere($baseWhere);
         } elseif (
-            (self::PARAMETER_BEFORE === $operator && self::INCLUDE_NULL_BEFORE === $nullManagement)
-            ||
+            (self::PARAMETER_BEFORE === $operator && self::INCLUDE_NULL_BEFORE === $nullManagement) ||
             (self::PARAMETER_AFTER === $operator && self::INCLUDE_NULL_AFTER === $nullManagement)
         ) {
             $queryBuilder->andWhere($queryBuilder->expr()->orX(
@@ -175,7 +175,7 @@ class DateFilter extends AbstractFilter
         }
 
         foreach ($properties as $property => $nullManagement) {
-            if (!$this->isPropertyMapped($property, $resource)) {
+            if (!$this->isPropertyMapped($property, $resource) || !$this->isDateField($property, $resource)) {
                 continue;
             }
 
@@ -208,7 +208,8 @@ class DateFilter extends AbstractFilter
     /**
      * Determines whether the given property refers to a date field.
      *
-     * @param string $property
+     * @param string            $property
+     * @param ResourceInterface $resource
      *
      * @return bool
      */

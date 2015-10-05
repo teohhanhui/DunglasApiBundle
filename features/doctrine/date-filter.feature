@@ -29,8 +29,8 @@ Feature: Date filter on collections
               "description": "Not so smart dummy.",
               "dummyDate": "2015-04-28T00:00:00+00:00",
               "jsonData": [],
-              "dummy": null,
               "relatedDummy": null,
+              "dummy": null,
               "relatedDummies": [],
               "name_converted": null
           },
@@ -42,15 +42,15 @@ Feature: Date filter on collections
               "description": "Smart dummy.",
               "dummyDate": "2015-04-29T00:00:00+00:00",
               "jsonData": [],
-              "dummy": null,
               "relatedDummy": null,
+              "dummy": null,
               "relatedDummies": [],
               "name_converted": null
           }
       ],
       "hydra:search": {
           "@type": "hydra:IriTemplate",
-          "hydra:template": "/dummies{?id,name,alias,description,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
           "hydra:variableRepresentation": "BasicRepresentation",
           "hydra:mapping": [
               {
@@ -79,6 +79,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.name",
+                  "property": "relatedDummy.name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "relatedDummies[]",
                   "property": "relatedDummies",
                   "required": false
@@ -97,6 +103,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "order[relatedDummy.symfony]",
+                  "property": "relatedDummy.symfony",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "dummyDate[before]",
                   "property": "dummyDate",
                   "required": false
@@ -105,6 +117,18 @@ Feature: Date filter on collections
                   "@type": "IriTemplateMapping",
                   "variable": "dummyDate[after]",
                   "property": "dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[before]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[after]",
+                  "property": "relatedDummy.dummyDate",
                   "required": false
               }
           ]
@@ -136,8 +160,8 @@ Feature: Date filter on collections
               "description": "Smart dummy.",
               "dummyDate": "2015-04-01T00:00:00+00:00",
               "jsonData": [],
-              "dummy": null,
               "relatedDummy": null,
+              "dummy": null,
               "relatedDummies": [],
               "name_converted": null
           },
@@ -149,8 +173,8 @@ Feature: Date filter on collections
               "description": "Not so smart dummy.",
               "dummyDate": "2015-04-02T00:00:00+00:00",
               "jsonData": [],
-              "dummy": null,
               "relatedDummy": null,
+              "dummy": null,
               "relatedDummies": [],
               "name_converted": null
           },
@@ -162,15 +186,15 @@ Feature: Date filter on collections
               "description": "Smart dummy.",
               "dummyDate": "2015-04-03T00:00:00+00:00",
               "jsonData": [],
-              "dummy": null,
               "relatedDummy": null,
+              "dummy": null,
               "relatedDummies": [],
               "name_converted": null
           }
       ],
       "hydra:search": {
           "@type": "hydra:IriTemplate",
-          "hydra:template": "/dummies{?id,name,alias,description,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
           "hydra:variableRepresentation": "BasicRepresentation",
           "hydra:mapping": [
               {
@@ -199,6 +223,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.name",
+                  "property": "relatedDummy.name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "relatedDummies[]",
                   "property": "relatedDummies",
                   "required": false
@@ -217,6 +247,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "order[relatedDummy.symfony]",
+                  "property": "relatedDummy.symfony",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "dummyDate[before]",
                   "property": "dummyDate",
                   "required": false
@@ -225,6 +261,18 @@ Feature: Date filter on collections
                   "@type": "IriTemplateMapping",
                   "variable": "dummyDate[after]",
                   "property": "dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[before]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[after]",
+                  "property": "relatedDummy.dummyDate",
                   "required": false
               }
           ]
@@ -257,15 +305,15 @@ Feature: Date filter on collections
               "description": "Smart dummy.",
               "dummyDate": "2015-04-05T00:00:00+00:00",
               "jsonData": [],
-              "dummy": null,
               "relatedDummy": null,
+              "dummy": null,
               "relatedDummies": [],
               "name_converted": null
           }
       ],
       "hydra:search": {
           "@type": "hydra:IriTemplate",
-          "hydra:template": "/dummies{?id,name,alias,description,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
           "hydra:variableRepresentation": "BasicRepresentation",
           "hydra:mapping": [
               {
@@ -294,6 +342,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.name",
+                  "property": "relatedDummy.name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "relatedDummies[]",
                   "property": "relatedDummies",
                   "required": false
@@ -312,6 +366,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "order[relatedDummy.symfony]",
+                  "property": "relatedDummy.symfony",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "dummyDate[before]",
                   "property": "dummyDate",
                   "required": false
@@ -320,6 +380,18 @@ Feature: Date filter on collections
                   "@type": "IriTemplateMapping",
                   "variable": "dummyDate[after]",
                   "property": "dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[before]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[after]",
+                  "property": "relatedDummy.dummyDate",
                   "required": false
               }
           ]
@@ -350,15 +422,15 @@ Feature: Date filter on collections
               "description": "Smart dummy.",
               "dummyDate": "2015-04-05T00:00:00+00:00",
               "jsonData": [],
-              "dummy": null,
               "relatedDummy": null,
+              "dummy": null,
               "relatedDummies": [],
               "name_converted": null
           }
       ],
       "hydra:search": {
           "@type": "hydra:IriTemplate",
-          "hydra:template": "/dummies{?id,name,alias,description,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
           "hydra:variableRepresentation": "BasicRepresentation",
           "hydra:mapping": [
               {
@@ -387,6 +459,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.name",
+                  "property": "relatedDummy.name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "relatedDummies[]",
                   "property": "relatedDummies",
                   "required": false
@@ -405,6 +483,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "order[relatedDummy.symfony]",
+                  "property": "relatedDummy.symfony",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "dummyDate[before]",
                   "property": "dummyDate",
                   "required": false
@@ -414,13 +498,24 @@ Feature: Date filter on collections
                   "variable": "dummyDate[after]",
                   "property": "dummyDate",
                   "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[before]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[after]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
               }
           ]
       }
     }
     """
 
-  @dropSchema
   Scenario: Search for entities within an impossible range
     When I send a "GET" request to "/dummies?dummyDate[after]=2015-04-06&dummyDate[before]=2015-04-04"
     Then the response status code should be 200
@@ -439,7 +534,7 @@ Feature: Date filter on collections
       "hydra:member": [],
       "hydra:search": {
           "@type": "hydra:IriTemplate",
-          "hydra:template": "/dummies{?id,name,alias,description,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
           "hydra:variableRepresentation": "BasicRepresentation",
           "hydra:mapping": [
               {
@@ -468,6 +563,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.name",
+                  "property": "relatedDummy.name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "relatedDummies[]",
                   "property": "relatedDummies",
                   "required": false
@@ -486,6 +587,12 @@ Feature: Date filter on collections
               },
               {
                   "@type": "IriTemplateMapping",
+                  "variable": "order[relatedDummy.symfony]",
+                  "property": "relatedDummy.symfony",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
                   "variable": "dummyDate[before]",
                   "property": "dummyDate",
                   "required": false
@@ -494,6 +601,277 @@ Feature: Date filter on collections
                   "@type": "IriTemplateMapping",
                   "variable": "dummyDate[after]",
                   "property": "dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[before]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[after]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              }
+          ]
+      }
+    }
+    """
+
+  @dropSchema
+  Scenario: Get collection filtered by association date
+    Given there is "30" dummy objects with dummyDate and relatedDummy
+    When I send a "GET" request to "/dummies?relatedDummy.dummyDate[after]=2015-04-28"
+    Then the response status code should be 200
+    And the response should be in JSON
+    And the header "Content-Type" should be equal to "application/ld+json"
+    And the JSON should be equal to:
+    """
+    {
+      "@context": "/contexts/Dummy",
+      "@id": "/dummies?relatedDummy.dummyDate[after]=2015-04-28",
+      "@type": "hydra:PagedCollection",
+      "hydra:totalItems": 3,
+      "hydra:itemsPerPage": 3,
+      "hydra:firstPage": "/dummies?relatedDummy_dummyDate%5Bafter%5D=2015-04-28",
+      "hydra:lastPage": "/dummies?relatedDummy_dummyDate%5Bafter%5D=2015-04-28",
+      "hydra:member": [
+          {
+              "@id": "/dummies/58",
+              "@type": "Dummy",
+              "name": "Dummy #28",
+              "alias": "Alias #2",
+              "dummyDate": "2015-04-28T00:00:00+00:00",
+              "jsonData": [],
+              "relatedDummy": "/related_dummies/28",
+              "dummy": null,
+              "relatedDummies": [],
+              "name_converted": null
+          },
+          {
+              "@id": "/dummies/59",
+              "@type": "Dummy",
+              "name": "Dummy #29",
+              "alias": "Alias #1",
+              "dummyDate": "2015-04-29T00:00:00+00:00",
+              "jsonData": [],
+              "relatedDummy": "/related_dummies/29",
+              "dummy": null,
+              "relatedDummies": [],
+              "name_converted": null
+          },
+          {
+              "@id": "/dummies/60",
+              "@type": "Dummy",
+              "name": "Dummy #30",
+              "alias": "Alias #0",
+              "dummyDate": null,
+              "jsonData": [],
+              "relatedDummy": "/related_dummies/30",
+              "dummy": null,
+              "relatedDummies": [],
+              "name_converted": null
+          }
+      ],
+      "hydra:search": {
+          "@type": "hydra:IriTemplate",
+          "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
+          "hydra:variableRepresentation": "BasicRepresentation",
+          "hydra:mapping": [
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "id",
+                  "property": "id",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "name",
+                  "property": "name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.name",
+                  "property": "relatedDummy.name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummies[]",
+                  "property": "relatedDummies",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "order[id]",
+                  "property": "id",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "order[name]",
+                  "property": "name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "order[relatedDummy.symfony]",
+                  "property": "relatedDummy.symfony",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "dummyDate[before]",
+                  "property": "dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "dummyDate[after]",
+                  "property": "dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[before]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[after]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              }
+          ]
+      }
+    }
+    """
+
+    When I send a "GET" request to "/dummies?relatedDummy.dummyDate[after]=2015-04-28&relatedDummy_dummyDate[after]=2015-04-28"
+    Then the response status code should be 200
+    And the response should be in JSON
+    And the header "Content-Type" should be equal to "application/ld+json"
+    And the JSON should be equal to:
+    """
+    {
+      "@context": "/contexts/Dummy",
+      "@id": "/dummies?relatedDummy.dummyDate[after]=2015-04-28&relatedDummy_dummyDate[after]=2015-04-28",
+      "@type": "hydra:PagedCollection",
+      "hydra:totalItems": 3,
+      "hydra:itemsPerPage": 3,
+      "hydra:firstPage": "/dummies?relatedDummy_dummyDate%5Bafter%5D=2015-04-28",
+      "hydra:lastPage": "/dummies?relatedDummy_dummyDate%5Bafter%5D=2015-04-28",
+      "hydra:member": [
+          {
+              "@id": "/dummies/58",
+              "@type": "Dummy",
+              "name": "Dummy #28",
+              "alias": "Alias #2",
+              "dummyDate": "2015-04-28T00:00:00+00:00",
+              "jsonData": [],
+              "relatedDummy": "/related_dummies/28",
+              "dummy": null,
+              "relatedDummies": [],
+              "name_converted": null
+          },
+          {
+              "@id": "/dummies/59",
+              "@type": "Dummy",
+              "name": "Dummy #29",
+              "alias": "Alias #1",
+              "dummyDate": "2015-04-29T00:00:00+00:00",
+              "jsonData": [],
+              "relatedDummy": "/related_dummies/29",
+              "dummy": null,
+              "relatedDummies": [],
+              "name_converted": null
+          },
+          {
+              "@id": "/dummies/60",
+              "@type": "Dummy",
+              "name": "Dummy #30",
+              "alias": "Alias #0",
+              "dummyDate": null,
+              "jsonData": [],
+              "relatedDummy": "/related_dummies/30",
+              "dummy": null,
+              "relatedDummies": [],
+              "name_converted": null
+          }
+      ],
+      "hydra:search": {
+          "@type": "hydra:IriTemplate",
+          "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
+          "hydra:variableRepresentation": "BasicRepresentation",
+          "hydra:mapping": [
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "id",
+                  "property": "id",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "name",
+                  "property": "name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.name",
+                  "property": "relatedDummy.name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummies[]",
+                  "property": "relatedDummies",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "order[id]",
+                  "property": "id",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "order[name]",
+                  "property": "name",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "order[relatedDummy.symfony]",
+                  "property": "relatedDummy.symfony",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "dummyDate[before]",
+                  "property": "dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "dummyDate[after]",
+                  "property": "dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[before]",
+                  "property": "relatedDummy.dummyDate",
+                  "required": false
+              },
+              {
+                  "@type": "IriTemplateMapping",
+                  "variable": "relatedDummy.dummyDate[after]",
+                  "property": "relatedDummy.dummyDate",
                   "required": false
               }
           ]
