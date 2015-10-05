@@ -21,8 +21,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Order the collection by given properties.
  *
- * @author Théo FIDRY <theo.fidry@gmail.com>
  * @author Kévin Dunglas <dunglas@gmail.com>
+ * @author Théo FIDRY <theo.fidry@gmail.com>
+ * @author Vincent CHALAMON <vincentchalamon@gmail.com>
  */
 class OrderFilter extends AbstractFilter
 {
@@ -30,6 +31,7 @@ class OrderFilter extends AbstractFilter
      * @var string Keyword used to retrieve the value.
      */
     private $orderParameter;
+
     /**
      * @var RequestStack
      */
@@ -75,7 +77,7 @@ class OrderFilter extends AbstractFilter
                 continue;
             }
 
-            if ('' === $order && isset($this->properties[$property])) {
+            if (empty($order) && isset($this->properties[$property])) {
                 $order = $this->properties[$property];
             }
 

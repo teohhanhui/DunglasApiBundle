@@ -36,12 +36,14 @@ Feature: Relations support
     And the JSON should be equal to:
     """
     {
-      "@context": "/contexts/RelatedDummy",
-      "@id": "/related_dummies/1",
-      "@type": "https://schema.org/Product",
+      "@context": "\/contexts\/RelatedDummy",
+      "@id": "\/related_dummies\/1",
+      "@type": "https:\/\/schema.org\/Product",
+      "name": null,
       "symfony": "symfony",
+      "dummyDate": null,
       "age": null,
-      "thirdLevel": "/third_levels/1",
+      "thirdLevel": "\/third_levels\/1",
       "unknown": null
     }
     """
@@ -64,17 +66,17 @@ Feature: Relations support
     And the JSON should be equal to:
     """
     {
-      "@context": "/contexts/Dummy",
-      "@id": "/dummies/1",
+      "@context": "\/contexts\/Dummy",
+      "@id": "\/dummies\/1",
       "@type": "Dummy",
       "name": "Dummy with relations",
       "alias": null,
       "dummyDate": null,
       "jsonData": [],
+      "relatedDummy": "\/related_dummies\/1",
       "dummy": null,
-      "relatedDummy": "/related_dummies/1",
       "relatedDummies": [
-        "/related_dummies/1"
+          "\/related_dummies\/1"
       ],
       "name_converted": null
     }
@@ -88,78 +90,102 @@ Feature: Relations support
     And the JSON should be equal to:
     """
     {
-      "@context": "/contexts/Dummy",
-      "@id": "/dummies?relatedDummy=%2Frelated_dummies%2F1",
-      "@type": "hydra:PagedCollection",
-      "hydra:totalItems": 1,
-      "hydra:itemsPerPage": 3,
-      "hydra:firstPage": "/dummies?relatedDummy=%2Frelated_dummies%2F1",
-      "hydra:lastPage": "/dummies?relatedDummy=%2Frelated_dummies%2F1",
-      "hydra:member": [
-        {
-          "@id": "/dummies/1",
-          "@type": "Dummy",
-          "name": "Dummy with relations",
-          "alias": null,
-          "dummyDate": null,
-          "jsonData": [],
-          "dummy": null,
-          "relatedDummy": "/related_dummies/1",
-          "relatedDummies": [
-            "/related_dummies/1"
-          ],
-          "name_converted": null
+        "@context": "\/contexts\/Dummy",
+        "@id": "\/dummies?relatedDummy=%2Frelated_dummies%2F1",
+        "@type": "hydra:PagedCollection",
+        "hydra:totalItems": 1,
+        "hydra:itemsPerPage": 3,
+        "hydra:firstPage": "\/dummies?relatedDummy=%2Frelated_dummies%2F1",
+        "hydra:lastPage": "\/dummies?relatedDummy=%2Frelated_dummies%2F1",
+        "hydra:member": [
+            {
+                "@id": "\/dummies\/1",
+                "@type": "Dummy",
+                "name": "Dummy with relations",
+                "alias": null,
+                "dummyDate": null,
+                "jsonData": [],
+                "relatedDummy": "\/related_dummies\/1",
+                "dummy": null,
+                "relatedDummies": [
+                    "\/related_dummies\/1"
+                ],
+                "name_converted": null
+            }
+        ],
+        "hydra:search": {
+            "@type": "hydra:IriTemplate",
+            "hydra:template": "\/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
+            "hydra:variableRepresentation": "BasicRepresentation",
+            "hydra:mapping": [
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
+            ]
         }
-      ],
-      "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "\/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
-        ]
-      }
     }
     """
 
@@ -171,78 +197,102 @@ Feature: Relations support
     And the JSON should be equal to:
     """
     {
-      "@context": "/contexts/Dummy",
-      "@id": "/dummies?relatedDummies[]=%2Frelated_dummies%2F1",
-      "@type": "hydra:PagedCollection",
-      "hydra:totalItems": 1,
-      "hydra:itemsPerPage": 3,
-      "hydra:firstPage": "/dummies?relatedDummies%5B%5D=%2Frelated_dummies%2F1",
-      "hydra:lastPage": "/dummies?relatedDummies%5B%5D=%2Frelated_dummies%2F1",
-      "hydra:member": [
-        {
-          "@id": "/dummies/1",
-          "@type": "Dummy",
-          "name": "Dummy with relations",
-          "alias": null,
-          "dummyDate": null,
-          "jsonData": [],
-          "dummy": null,
-          "relatedDummy": "/related_dummies/1",
-          "relatedDummies": [
-            "/related_dummies/1"
-          ],
-          "name_converted": null
+        "@context": "\/contexts\/Dummy",
+        "@id": "\/dummies?relatedDummies[]=%2Frelated_dummies%2F1",
+        "@type": "hydra:PagedCollection",
+        "hydra:totalItems": 1,
+        "hydra:itemsPerPage": 3,
+        "hydra:firstPage": "\/dummies?relatedDummies%5B%5D=%2Frelated_dummies%2F1",
+        "hydra:lastPage": "\/dummies?relatedDummies%5B%5D=%2Frelated_dummies%2F1",
+        "hydra:member": [
+            {
+                "@id": "\/dummies\/1",
+                "@type": "Dummy",
+                "name": "Dummy with relations",
+                "alias": null,
+                "dummyDate": null,
+                "jsonData": [],
+                "relatedDummy": "\/related_dummies\/1",
+                "dummy": null,
+                "relatedDummies": [
+                    "\/related_dummies\/1"
+                ],
+                "name_converted": null
+            }
+        ],
+        "hydra:search": {
+            "@type": "hydra:IriTemplate",
+            "hydra:template": "\/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
+            "hydra:variableRepresentation": "BasicRepresentation",
+            "hydra:mapping": [
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
+            ]
         }
-      ],
-      "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "\/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
-        ]
-      }
     }
     """
 

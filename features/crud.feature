@@ -36,8 +36,8 @@ Feature: Create-Retrieve-Update-Delete
           "value2"
         ]
       },
-      "dummy": null,
       "relatedDummy": null,
+      "dummy": null,
       "relatedDummies": [],
       "name_converted": null
     }
@@ -63,8 +63,8 @@ Feature: Create-Retrieve-Update-Delete
           "value2"
         ]
       },
-      "dummy": null,
       "relatedDummy": null,
+      "dummy": null,
       "relatedDummies": [],
       "name_converted": null
     }
@@ -98,66 +98,90 @@ Feature: Create-Retrieve-Update-Delete
               "value2"
             ]
           },
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [],
           "name_converted": null
         }
       ],
       "hydra:search": {
               "@type": "hydra:IriTemplate",
-              "hydra:template": "\/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+              "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
               "hydra:variableRepresentation": "BasicRepresentation",
               "hydra:mapping": [
-                  {
-                      "@type": "IriTemplateMapping",
-                      "variable": "id",
-                      "property": "id",
-                      "required": false
-                  },
-                  {
-                      "@type": "IriTemplateMapping",
-                      "variable": "name",
-                      "property": "name",
-                      "required": false
-                  },
-                  {
-                      "@type": "IriTemplateMapping",
-                      "variable": "relatedDummies[]",
-                      "property": "relatedDummies",
-                      "required": false
-                  },
-                  {
-                      "@type": "IriTemplateMapping",
-                      "variable": "order[id]",
-                      "property": "id",
-                      "required": false
-                  },
-                  {
-                      "@type": "IriTemplateMapping",
-                      "variable": "order[name]",
-                      "property": "name",
-                      "required": false
-                  },
-                  {
-                      "@type": "IriTemplateMapping",
-                      "variable": "dummyDate[before]",
-                      "property": "dummyDate",
-                      "required": false
-                  },
-                  {
-                      "@type": "IriTemplateMapping",
-                      "variable": "dummyDate[after]",
-                      "property": "dummyDate",
-                      "required": false
-                  }
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
               ]
       }
     }
     """
 
   Scenario: Update a resource
-      When I send a "PUT" request to "/dummies/1" with body:
+    When I send a "PUT" request to "/dummies/1" with body:
       """
       {
         "@id": "/dummies/1",
@@ -171,10 +195,10 @@ Feature: Create-Retrieve-Update-Delete
         ]
       }
       """
-      Then the response status code should be 200
-      And the response should be in JSON
-      And the header "Content-Type" should be equal to "application/ld+json"
-      And the JSON should be equal to:
+    Then the response status code should be 200
+    And the response should be in JSON
+    And the header "Content-Type" should be equal to "application/ld+json"
+    And the JSON should be equal to:
       """
       {
         "@context": "/contexts/Dummy",
@@ -190,8 +214,8 @@ Feature: Create-Retrieve-Update-Delete
             "key": "value2"
           }
         ],
-        "dummy": null,
         "relatedDummy": null,
+        "dummy": null,
         "relatedDummies": [],
         "name_converted": null
       }

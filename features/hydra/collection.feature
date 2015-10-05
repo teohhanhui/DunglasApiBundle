@@ -12,63 +12,87 @@ Feature: Collections support
     And the JSON should be equal to:
     """
     {
-      "@context": "/contexts/Dummy",
-      "@id": "/dummies",
-      "@type": "hydra:PagedCollection",
-      "hydra:totalItems": 0,
-      "hydra:itemsPerPage": 3,
-      "hydra:firstPage": "/dummies",
-      "hydra:lastPage": "/dummies",
-      "hydra:member": [],
-      "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
-        ]
-      }
+        "@context": "/contexts/Dummy",
+        "@id": "/dummies",
+        "@type": "hydra:PagedCollection",
+        "hydra:totalItems": 0,
+        "hydra:itemsPerPage": 3,
+        "hydra:firstPage": "/dummies",
+        "hydra:lastPage": "/dummies",
+        "hydra:member": [],
+        "hydra:search": {
+            "@type": "hydra:IriTemplate",
+            "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
+            "hydra:variableRepresentation": "BasicRepresentation",
+            "hydra:mapping": [
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
+            ]
+        }
     }
     """
 
@@ -81,101 +105,125 @@ Feature: Collections support
     And the JSON should be equal to:
     """
     {
-      "@context": "/contexts/Dummy",
-      "@id": "/dummies",
-      "@type": "hydra:PagedCollection",
-      "hydra:nextPage": "/dummies?page=2",
-      "hydra:totalItems": 30,
-      "hydra:itemsPerPage": 3,
-      "hydra:firstPage": "/dummies",
-      "hydra:lastPage": "/dummies?page=10",
-      "hydra:member": [
-        {
-          "@id": "/dummies/1",
-          "@type": "Dummy",
-          "name": "Dummy #1",
-          "alias": "Alias #29",
-          "dummyDate": null,
-          "jsonData": [],
-          "dummy": null,
-          "relatedDummy": null,
-          "relatedDummies": [],
-          "name_converted": null
-        },
-        {
-          "@id": "/dummies/2",
-          "@type": "Dummy",
-          "name": "Dummy #2",
-          "alias": "Alias #28",
-          "dummyDate": null,
-          "jsonData": [],
-          "dummy": null,
-          "relatedDummy": null,
-          "relatedDummies": [],
-          "name_converted": null
-        },
-        {
-          "@id": "/dummies/3",
-          "@type": "Dummy",
-          "name": "Dummy #3",
-          "alias": "Alias #27",
-          "dummyDate": null,
-          "jsonData": [],
-          "dummy": null,
-          "relatedDummy": null,
-          "relatedDummies": [],
-          "name_converted": null
+        "@context": "/contexts/Dummy",
+        "@id": "/dummies",
+        "@type": "hydra:PagedCollection",
+        "hydra:nextPage": "/dummies?page=2",
+        "hydra:totalItems": 30,
+        "hydra:itemsPerPage": 3,
+        "hydra:firstPage": "/dummies",
+        "hydra:lastPage": "/dummies?page=10",
+        "hydra:member": [
+            {
+                "@id": "/dummies/1",
+                "@type": "Dummy",
+                "name": "Dummy #1",
+                "alias": "Alias #29",
+                "dummyDate": null,
+                "jsonData": [],
+                "relatedDummy": null,
+                "dummy": null,
+                "relatedDummies": [],
+                "name_converted": null
+            },
+            {
+                "@id": "/dummies/2",
+                "@type": "Dummy",
+                "name": "Dummy #2",
+                "alias": "Alias #28",
+                "dummyDate": null,
+                "jsonData": [],
+                "relatedDummy": null,
+                "dummy": null,
+                "relatedDummies": [],
+                "name_converted": null
+            },
+            {
+                "@id": "/dummies/3",
+                "@type": "Dummy",
+                "name": "Dummy #3",
+                "alias": "Alias #27",
+                "dummyDate": null,
+                "jsonData": [],
+                "relatedDummy": null,
+                "dummy": null,
+                "relatedDummies": [],
+                "name_converted": null
+            }
+        ],
+        "hydra:search": {
+            "@type": "hydra:IriTemplate",
+            "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
+            "hydra:variableRepresentation": "BasicRepresentation",
+            "hydra:mapping": [
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
+            ]
         }
-      ],
-      "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
-        ]
-      }
     }
     """
 
@@ -187,102 +235,126 @@ Feature: Collections support
     And the JSON should be equal to:
     """
     {
-      "@context": "/contexts/Dummy",
-      "@id": "/dummies?page=7",
-      "@type": "hydra:PagedCollection",
-      "hydra:previousPage": "/dummies?page=6",
-      "hydra:nextPage": "/dummies?page=8",
-      "hydra:totalItems": 30,
-      "hydra:itemsPerPage": 3,
-      "hydra:firstPage": "/dummies",
-      "hydra:lastPage": "/dummies?page=10",
-      "hydra:member": [
-        {
-          "@id": "/dummies/19",
-          "@type": "Dummy",
-          "name": "Dummy #19",
-          "alias": "Alias #11",
-          "dummyDate": null,
-          "jsonData": [],
-          "dummy": null,
-          "relatedDummy": null,
-          "relatedDummies": [],
-          "name_converted": null
-        },
-        {
-          "@id": "/dummies/20",
-          "@type": "Dummy",
-          "name": "Dummy #20",
-          "alias": "Alias #10",
-          "dummyDate": null,
-          "jsonData": [],
-          "dummy": null,
-          "relatedDummy": null,
-          "relatedDummies": [],
-          "name_converted": null
-        },
-        {
-          "@id": "/dummies/21",
-          "@type": "Dummy",
-          "name": "Dummy #21",
-          "alias": "Alias #9",
-          "dummyDate": null,
-          "jsonData": [],
-          "dummy": null,
-          "relatedDummy": null,
-          "relatedDummies": [],
-          "name_converted": null
+        "@context": "/contexts/Dummy",
+        "@id": "/dummies?page=7",
+        "@type": "hydra:PagedCollection",
+        "hydra:previousPage": "/dummies?page=6",
+        "hydra:nextPage": "/dummies?page=8",
+        "hydra:totalItems": 30,
+        "hydra:itemsPerPage": 3,
+        "hydra:firstPage": "/dummies",
+        "hydra:lastPage": "/dummies?page=10",
+        "hydra:member": [
+            {
+                "@id": "/dummies/19",
+                "@type": "Dummy",
+                "name": "Dummy #19",
+                "alias": "Alias #11",
+                "dummyDate": null,
+                "jsonData": [],
+                "relatedDummy": null,
+                "dummy": null,
+                "relatedDummies": [],
+                "name_converted": null
+            },
+            {
+                "@id": "/dummies/20",
+                "@type": "Dummy",
+                "name": "Dummy #20",
+                "alias": "Alias #10",
+                "dummyDate": null,
+                "jsonData": [],
+                "relatedDummy": null,
+                "dummy": null,
+                "relatedDummies": [],
+                "name_converted": null
+            },
+            {
+                "@id": "/dummies/21",
+                "@type": "Dummy",
+                "name": "Dummy #21",
+                "alias": "Alias #9",
+                "dummyDate": null,
+                "jsonData": [],
+                "relatedDummy": null,
+                "dummy": null,
+                "relatedDummies": [],
+                "name_converted": null
+            }
+        ],
+        "hydra:search": {
+            "@type": "hydra:IriTemplate",
+            "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
+            "hydra:variableRepresentation": "BasicRepresentation",
+            "hydra:mapping": [
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
+            ]
         }
-      ],
-      "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
-        ]
-      }
     }
     """
 
@@ -310,8 +382,8 @@ Feature: Collections support
             "alias": "Alias #2",
             "dummyDate": null,
             "jsonData": [],
-            "dummy": null,
             "relatedDummy": null,
+            "dummy": null,
             "relatedDummies": [],
             "name_converted": null
           },
@@ -322,8 +394,8 @@ Feature: Collections support
             "alias": "Alias #1",
             "dummyDate": null,
             "jsonData": [],
-            "dummy": null,
             "relatedDummy": null,
+            "dummy": null,
             "relatedDummies": [],
             "name_converted": null
           },
@@ -334,59 +406,83 @@ Feature: Collections support
             "alias": "Alias #0",
             "dummyDate": null,
             "jsonData": [],
-            "dummy": null,
             "relatedDummy": null,
+            "dummy": null,
             "relatedDummies": [],
             "name_converted": null
           }
       ],
       "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+        "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
         ]
       }
     }
@@ -411,8 +507,8 @@ Feature: Collections support
                 "alias": "Alias #29",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -423,8 +519,8 @@ Feature: Collections support
                 "alias": "Alias #28",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -435,8 +531,8 @@ Feature: Collections support
                 "alias": "Alias #27",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -447,8 +543,8 @@ Feature: Collections support
                 "alias": "Alias #26",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -459,8 +555,8 @@ Feature: Collections support
                 "alias": "Alias #25",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -471,8 +567,8 @@ Feature: Collections support
                 "alias": "Alias #24",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -483,8 +579,8 @@ Feature: Collections support
                 "alias": "Alias #23",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -495,8 +591,8 @@ Feature: Collections support
                 "alias": "Alias #22",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -507,8 +603,8 @@ Feature: Collections support
                 "alias": "Alias #21",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -519,8 +615,8 @@ Feature: Collections support
                 "alias": "Alias #20",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -531,8 +627,8 @@ Feature: Collections support
                 "alias": "Alias #19",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -543,8 +639,8 @@ Feature: Collections support
                 "alias": "Alias #18",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -555,8 +651,8 @@ Feature: Collections support
                 "alias": "Alias #17",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -567,8 +663,8 @@ Feature: Collections support
                 "alias": "Alias #16",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -579,8 +675,8 @@ Feature: Collections support
                 "alias": "Alias #15",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -591,8 +687,8 @@ Feature: Collections support
                 "alias": "Alias #14",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -603,8 +699,8 @@ Feature: Collections support
                 "alias": "Alias #13",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -615,8 +711,8 @@ Feature: Collections support
                 "alias": "Alias #12",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -627,8 +723,8 @@ Feature: Collections support
                 "alias": "Alias #11",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -639,8 +735,8 @@ Feature: Collections support
                 "alias": "Alias #10",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -651,8 +747,8 @@ Feature: Collections support
                 "alias": "Alias #9",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -663,8 +759,8 @@ Feature: Collections support
                 "alias": "Alias #8",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -675,8 +771,8 @@ Feature: Collections support
                 "alias": "Alias #7",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -687,8 +783,8 @@ Feature: Collections support
                 "alias": "Alias #6",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -699,8 +795,8 @@ Feature: Collections support
                 "alias": "Alias #5",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -711,8 +807,8 @@ Feature: Collections support
                 "alias": "Alias #4",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -723,8 +819,8 @@ Feature: Collections support
                 "alias": "Alias #3",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -735,8 +831,8 @@ Feature: Collections support
                 "alias": "Alias #2",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -747,8 +843,8 @@ Feature: Collections support
                 "alias": "Alias #1",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             },
@@ -759,15 +855,15 @@ Feature: Collections support
                 "alias": "Alias #0",
                 "dummyDate": null,
                 "jsonData": [],
-                "dummy": null,
                 "relatedDummy": null,
+                "dummy": null,
                 "relatedDummies": [],
                 "name_converted": null
             }
         ],
         "hydra:search": {
             "@type": "hydra:IriTemplate",
-            "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+            "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
             "hydra:variableRepresentation": "BasicRepresentation",
             "hydra:mapping": [
                 {
@@ -780,6 +876,12 @@ Feature: Collections support
                     "@type": "IriTemplateMapping",
                     "variable": "name",
                     "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
                     "required": false
                 },
                 {
@@ -802,6 +904,12 @@ Feature: Collections support
                 },
                 {
                     "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
                     "variable": "dummyDate[before]",
                     "property": "dummyDate",
                     "required": false
@@ -810,6 +918,18 @@ Feature: Collections support
                     "@type": "IriTemplateMapping",
                     "variable": "dummyDate[after]",
                     "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
                     "required": false
                 }
             ]
@@ -842,8 +962,8 @@ Feature: Collections support
           "alias": "Alias #19",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -856,8 +976,8 @@ Feature: Collections support
           "alias": "Alias #18",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -870,8 +990,8 @@ Feature: Collections support
           "alias": "Alias #17",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -884,8 +1004,8 @@ Feature: Collections support
           "alias": "Alias #16",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -898,8 +1018,8 @@ Feature: Collections support
           "alias": "Alias #15",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -912,8 +1032,8 @@ Feature: Collections support
           "alias": "Alias #14",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -926,8 +1046,8 @@ Feature: Collections support
           "alias": "Alias #13",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -940,8 +1060,8 @@ Feature: Collections support
           "alias": "Alias #12",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -954,8 +1074,8 @@ Feature: Collections support
           "alias": "Alias #11",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -968,8 +1088,8 @@ Feature: Collections support
           "alias": "Alias #10",
           "dummyDate": null,
           "jsonData": [],
-          "dummy": null,
           "relatedDummy": null,
+          "dummy": null,
           "relatedDummies": [
 
           ],
@@ -978,51 +1098,75 @@ Feature: Collections support
       ],
       "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+        "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
         ]
       }
     }
@@ -1051,59 +1195,83 @@ Feature: Collections support
             "alias": "Alias #22",
             "dummyDate": null,
             "jsonData": [],
-            "dummy": null,
             "relatedDummy": null,
+            "dummy": null,
             "relatedDummies": [],
             "name_converted": null
           }
       ],
       "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+        "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
         ]
       }
     }
@@ -1132,59 +1300,83 @@ Feature: Collections support
             "alias": "Alias #22",
             "dummyDate": null,
             "jsonData": [],
-            "dummy": null,
             "relatedDummy": null,
+            "dummy": null,
             "relatedDummies": [],
             "name_converted": null
           }
       ],
       "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+        "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
         ]
       }
     }
@@ -1214,59 +1406,83 @@ Feature: Collections support
             "alias": "Alias #22",
             "dummyDate": null,
             "jsonData": [],
-            "dummy": null,
             "relatedDummy": null,
+            "dummy": null,
             "relatedDummies": [],
             "name_converted": null
           }
       ],
       "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "/dummies{?id,name,relatedDummies[],order[id],order[name],dummyDate[before],dummyDate[after]}",
+        "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              }
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "id",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "name",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.name",
+                    "property": "relatedDummy.name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummies[]",
+                    "property": "relatedDummies",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[id]",
+                    "property": "id",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[name]",
+                    "property": "name",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "order[relatedDummy.symfony]",
+                    "property": "relatedDummy.symfony",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[before]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "dummyDate[after]",
+                    "property": "dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[before]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                },
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "relatedDummy.dummyDate[after]",
+                    "property": "relatedDummy.dummyDate",
+                    "required": false
+                }
         ]
       }
     }

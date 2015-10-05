@@ -11,19 +11,19 @@ Feature: JSON-LD contexts generation
     And the JSON should be equal to:
     """
     {
-        "@context": "\/contexts\/Entrypoint",
-        "@id": "\/",
+        "@context": "/contexts/Entrypoint",
+        "@id": "/",
         "@type": "Entrypoint",
-        "user": "\/users",
-        "dummy": "\/dummies",
-        "relatedDummy": "\/related_dummies",
-        "relationEmbedder": "\/relation_embedders",
-        "custom": "\/customs",
-        "thirdLevel": "\/third_levels",
-        "circularReference": "\/circular_references",
-        "customIdentifierDummy": "\/custom_identifier_dummies",
-        "customWritableIdentifierDummy": "\/custom_writable_identifier_dummies",
-        "customNormalizedDummy": "\/custom_normalized_dummies"
+        "user": "/users",
+        "dummy": "/dummies",
+        "relatedDummy": "/related_dummies",
+        "relationEmbedder": "/relation_embedders",
+        "custom": "/customs",
+        "thirdLevel": "/third_levels",
+        "circularReference": "/circular_references",
+        "customIdentifierDummy": "/custom_identifier_dummies",
+        "customWritableIdentifierDummy": "/custom_writable_identifier_dummies",
+        "customNormalizedDummy": "/custom_normalized_dummies"
     }
     """
 
@@ -41,12 +41,12 @@ Feature: JSON-LD contexts generation
             "name": "http://schema.org/name",
             "alias": "https://schema.org/alternateName",
             "dummyDate": "#Dummy/dummyDate",
-            "jsonData": "#Dummy\/jsonData",
-            "dummy": "#Dummy/dummy",
+            "jsonData": "#Dummy/jsonData",
             "relatedDummy": {
                 "@id": "#Dummy/relatedDummy",
                 "@type": "@id"
             },
+            "dummy": "#Dummy/dummy",
             "relatedDummies": {
                 "@id": "#Dummy/relatedDummies",
                 "@type": "@id"
