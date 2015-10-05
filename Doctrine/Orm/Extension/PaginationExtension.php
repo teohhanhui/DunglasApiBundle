@@ -63,8 +63,7 @@ class PaginationExtension implements QueryResultExtensionInterface
 
         $queryBuilder
             ->setFirstResult(($this->getPage($resource, $request) - 1) * $itemsPerPage)
-            ->setMaxResults($itemsPerPage)
-        ;
+            ->setMaxResults($itemsPerPage);
     }
 
     /**
@@ -74,7 +73,9 @@ class PaginationExtension implements QueryResultExtensionInterface
      */
     public function supportsResult(ResourceInterface $resource)
     {
-        return $this->isPaginationEnabled($resource, $this->requestStack->getCurrentRequest());
+        $request = $this->requestStack->getCurrentRequest();
+
+        return $request !== null && $this->isPaginationEnabled($resource, $request);
     }
 
     /**
@@ -132,7 +133,8 @@ class PaginationExtension implements QueryResultExtensionInterface
     private function getItemsPerPage(ResourceInterface $resource, Request $request)
     {
         if ($resource->isClientAllowedToChangeItemsPerPage()
-            && $itemsPerPage = $request->get($resource->getItemsPerPageParameter())) {
+            && $itemsPerPage = $request->get($resource->getItemsPerPageParameter())
+        ) {
             return (float) $itemsPerPage;
         }
 
