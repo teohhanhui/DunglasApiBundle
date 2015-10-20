@@ -142,6 +142,12 @@ class SearchFilterTest extends KernelTestCase
                 'required' => false,
                 'strategy' => 'exact',
             ],
+            'description' => [
+                'property' => 'description',
+                'type' => 'string',
+                'required' => false,
+                'strategy' => 'exact',
+            ],
             'dummy' => [
                 'property' => 'dummy',
                 'type' => 'string',
@@ -310,6 +316,49 @@ class SearchFilterTest extends KernelTestCase
                     'dql' => 'SELECT o FROM Dunglas\ApiBundle\Tests\Behat\TestBundle\Entity\Dummy o WHERE o.name like :name_123456abcdefg',
                     'parameters' => [
                         'name_123456abcdefg' => '%partial%',
+                    ],
+                ],
+            ],
+            [
+                [
+                    'properties' => ['id' => null, 'name' => 'start'],
+                ],
+                [
+                    'name' => 'partial',
+                ],
+                [
+                    'dql' => 'SELECT o FROM Dunglas\ApiBundle\Tests\Behat\TestBundle\Entity\Dummy o WHERE o.name like :name_123456abcdefg',
+                    'parameters' => [
+                        'name_123456abcdefg' => 'partial%',
+                    ],
+                ],
+            ],
+            [
+                [
+                    'properties' => ['id' => null, 'name' => 'end'],
+                ],
+                [
+                    'name' => 'partial',
+                ],
+                [
+                    'dql' => 'SELECT o FROM Dunglas\ApiBundle\Tests\Behat\TestBundle\Entity\Dummy o WHERE o.name like :name_123456abcdefg',
+                    'parameters' => [
+                        'name_123456abcdefg' => '%partial',
+                    ],
+                ],
+            ],
+            [
+                [
+                    'properties' => ['id' => null, 'name' => 'word_start'],
+                ],
+                [
+                    'name' => 'partial',
+                ],
+                [
+                    'dql' => 'SELECT o FROM Dunglas\ApiBundle\Tests\Behat\TestBundle\Entity\Dummy o WHERE o.name like :name_123456abcdefg_1 OR o.name like :name_123456abcdefg_2',
+                    'parameters' => [
+                        'name_123456abcdefg_1' => 'partial%',
+                        'name_123456abcdefg_2' => '% partial%',
                     ],
                 ],
             ],

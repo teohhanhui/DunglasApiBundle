@@ -65,11 +65,11 @@ class SearchFilter extends AbstractFilter
     private $requestStack;
 
     /**
-     * @param ManagerRegistry           $managerRegistry
-     * @param RequestStack              $requestStack
-     * @param IriConverterInterface     $iriConverter
+     * @param ManagerRegistry $managerRegistry
+     * @param RequestStack $requestStack
+     * @param IriConverterInterface $iriConverter
      * @param PropertyAccessorInterface $propertyAccessor
-     * @param null|array                $properties       Null to allow filtering on all properties with the exact strategy or a map of property name with strategy.
+     * @param null|array $properties Null to allow filtering on all properties with the exact strategy or a map of property name with strategy.
      */
     public function __construct(
         ManagerRegistry $managerRegistry,
@@ -184,11 +184,11 @@ class SearchFilter extends AbstractFilter
     /**
      * Adds where clause according to the strategy.
      *
-     * @param string       $strategy
+     * @param string $strategy
      * @param QueryBuilder $queryBuilder
-     * @param string       $alias
-     * @param string       $field
-     * @param string       $value
+     * @param string $alias
+     * @param string $field
+     * @param string $value
      *
      * @return string
      *
@@ -203,33 +203,28 @@ class SearchFilter extends AbstractFilter
             case self::STRATEGY_EXACT:
                 return $queryBuilder
                     ->andWhere(sprintf('%s.%s = :%s', $alias, $field, $valueParameter))
-                    ->setParameter($valueParameter, $value)
-                ;
+                    ->setParameter($valueParameter, $value);
 
             case self::STRATEGY_PARTIAL:
                 return $queryBuilder
                     ->andWhere(sprintf('%s.%s LIKE :%s', $alias, $field, $valueParameter))
-                    ->setParameter($valueParameter, sprintf('%%%s%%', $value))
-                ;
+                    ->setParameter($valueParameter, sprintf('%%%s%%', $value));
 
             case self::STRATEGY_START:
                 return $queryBuilder
                     ->andWhere(sprintf('%s.%s LIKE :%s', $alias, $field, $valueParameter))
-                    ->setParameter($valueParameter, sprintf('%s%%', $value))
-                ;
+                    ->setParameter($valueParameter, sprintf('%s%%', $value));
 
             case self::STRATEGY_END:
                 return $queryBuilder
                     ->andWhere(sprintf('%s.%s LIKE :%s', $alias, $field, $valueParameter))
-                    ->setParameter($valueParameter, sprintf('%%%s', $value))
-                ;
+                    ->setParameter($valueParameter, sprintf('%%%s', $value));
 
             case self::STRATEGY_WORD_START:
                 return $queryBuilder
                     ->andWhere(sprintf('%1$s.%2$s LIKE :%3$s_1 OR %1$s.%2$s LIKE :%3$s_2', $alias, $field, $valueParameter))
                     ->setParameter(sprintf('%s_1', $valueParameter), sprintf('%s%%', $value))
-                    ->setParameter(sprintf('%s_2', $valueParameter), sprintf('%% %s%%', $value))
-                ;
+                    ->setParameter(sprintf('%s_2', $valueParameter), sprintf('%% %s%%', $value));
         }
 
         throw new InvalidArgumentException(sprintf('strategy %s does not exist.', $strategy));
