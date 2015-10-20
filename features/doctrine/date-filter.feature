@@ -10,7 +10,7 @@ Feature: Date filter on collections
     Then the response status code should be 200
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json"
-    And the JSON should be equal to:
+    And the JSON should be valid according to this schema:
     """
     {
       "@context": "/contexts/Dummy",
@@ -21,118 +21,33 @@ Feature: Date filter on collections
       "hydra:firstPage": "/dummies?dummyDate%5Bafter%5D=2015-04-28",
       "hydra:lastPage": "/dummies?dummyDate%5Bafter%5D=2015-04-28",
       "hydra:member": [
-          {
-              "@id": "/dummies/28",
-              "@type": "Dummy",
-              "name": "Dummy #28",
-              "alias": "Alias #2",
-              "description": "Not so smart dummy.",
-              "dummyDate": "2015-04-28T00:00:00+00:00",
-              "jsonData": [],
-              "relatedDummy": null,
-              "dummy": null,
-              "relatedDummies": [],
-              "name_converted": null
-          },
-          {
-              "@id": "/dummies/29",
-              "@type": "Dummy",
-              "name": "Dummy #29",
-              "alias": "Alias #1",
-              "description": "Smart dummy.",
-              "dummyDate": "2015-04-29T00:00:00+00:00",
-              "jsonData": [],
-              "relatedDummy": null,
-              "dummy": null,
-              "relatedDummies": [],
-              "name_converted": null
-          }
-      ],
-      "hydra:search": {
-          "@type": "hydra:IriTemplate",
-          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
-          "hydra:variableRepresentation": "BasicRepresentation",
-          "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "alias",
-                  "property": "alias",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "description",
-                  "property": "description",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.name",
-                  "property": "relatedDummy.name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[relatedDummy.symfony]",
-                  "property": "relatedDummy.symfony",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[before]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[after]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              }
-          ]
-      }
+        {
+          "@id": "/dummies/28",
+          "@type": "Dummy",
+          "name": "Dummy #28",
+          "alias": "Alias #2",
+          "description": "Not so smart dummy.",
+          "dummyDate": "2015-04-28T00:00:00+00:00",
+          "jsonData": [],
+          "relatedDummy": null,
+          "dummy": null,
+          "relatedDummies": [],
+          "name_converted": null
+        },
+        {
+          "@id": "/dummies/29",
+          "@type": "Dummy",
+          "name": "Dummy #29",
+          "alias": "Alias #1",
+          "description": "Smart dummy.",
+          "dummyDate": "2015-04-29T00:00:00+00:00",
+          "jsonData": [],
+          "relatedDummy": null,
+          "dummy": null,
+          "relatedDummies": [],
+          "name_converted": null
+        }
+      ]
     }
     """
 
@@ -140,7 +55,7 @@ Feature: Date filter on collections
     Then the response status code should be 200
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json"
-    And the JSON should be equal to:
+    And the JSON should be valid according to this schema:
     """
     {
       "@context": "/contexts/Dummy",
@@ -191,92 +106,7 @@ Feature: Date filter on collections
               "relatedDummies": [],
               "name_converted": null
           }
-      ],
-      "hydra:search": {
-          "@type": "hydra:IriTemplate",
-          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
-          "hydra:variableRepresentation": "BasicRepresentation",
-          "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "alias",
-                  "property": "alias",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "description",
-                  "property": "description",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.name",
-                  "property": "relatedDummy.name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[relatedDummy.symfony]",
-                  "property": "relatedDummy.symfony",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[before]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[after]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              }
-          ]
-      }
+      ]
     }
     """
 
@@ -286,7 +116,7 @@ Feature: Date filter on collections
     Then the response status code should be 200
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json"
-    And the JSON should be equal to:
+    And the JSON should be valid according to this schema:
     """
     {
       "@context": "/contexts/Dummy",
@@ -310,92 +140,7 @@ Feature: Date filter on collections
               "relatedDummies": [],
               "name_converted": null
           }
-      ],
-      "hydra:search": {
-          "@type": "hydra:IriTemplate",
-          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
-          "hydra:variableRepresentation": "BasicRepresentation",
-          "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "alias",
-                  "property": "alias",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "description",
-                  "property": "description",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.name",
-                  "property": "relatedDummy.name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[relatedDummy.symfony]",
-                  "property": "relatedDummy.symfony",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[before]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[after]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              }
-          ]
-      }
+      ]
     }
     """
 
@@ -403,7 +148,7 @@ Feature: Date filter on collections
     Then the response status code should be 200
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json"
-    And the JSON should be equal to:
+    And the JSON should be valid according to this schema:
     """
     {
       "@context": "/contexts/Dummy",
@@ -427,92 +172,7 @@ Feature: Date filter on collections
               "relatedDummies": [],
               "name_converted": null
           }
-      ],
-      "hydra:search": {
-          "@type": "hydra:IriTemplate",
-          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
-          "hydra:variableRepresentation": "BasicRepresentation",
-          "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "alias",
-                  "property": "alias",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "description",
-                  "property": "description",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.name",
-                  "property": "relatedDummy.name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[relatedDummy.symfony]",
-                  "property": "relatedDummy.symfony",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[before]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[after]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              }
-          ]
-      }
+      ]
     }
     """
 
@@ -521,7 +181,7 @@ Feature: Date filter on collections
     Then the response status code should be 200
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json"
-    And the JSON should be equal to:
+    And the JSON should be valid according to this schema:
     """
     {
       "@context": "/contexts/Dummy",
@@ -531,92 +191,7 @@ Feature: Date filter on collections
       "hydra:itemsPerPage": 3,
       "hydra:firstPage": "/dummies?dummyDate%5Bafter%5D=2015-04-06&dummyDate%5Bbefore%5D=2015-04-04",
       "hydra:lastPage": "/dummies?dummyDate%5Bafter%5D=2015-04-06&dummyDate%5Bbefore%5D=2015-04-04",
-      "hydra:member": [],
-      "hydra:search": {
-          "@type": "hydra:IriTemplate",
-          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
-          "hydra:variableRepresentation": "BasicRepresentation",
-          "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "alias",
-                  "property": "alias",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "description",
-                  "property": "description",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.name",
-                  "property": "relatedDummy.name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[relatedDummy.symfony]",
-                  "property": "relatedDummy.symfony",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[before]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[after]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              }
-          ]
-      }
+      "hydra:member": []
     }
     """
 
@@ -627,7 +202,7 @@ Feature: Date filter on collections
     Then the response status code should be 200
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json"
-    And the JSON should be equal to:
+    And the JSON should be valid according to this schema:
     """
     {
       "@context": "/contexts/Dummy",
@@ -643,6 +218,7 @@ Feature: Date filter on collections
               "@type": "Dummy",
               "name": "Dummy #28",
               "alias": "Alias #2",
+              "description": null,
               "dummyDate": "2015-04-28T00:00:00+00:00",
               "jsonData": [],
               "relatedDummy": "/related_dummies/28",
@@ -655,6 +231,7 @@ Feature: Date filter on collections
               "@type": "Dummy",
               "name": "Dummy #29",
               "alias": "Alias #1",
+              "description": null,
               "dummyDate": "2015-04-29T00:00:00+00:00",
               "jsonData": [],
               "relatedDummy": "/related_dummies/29",
@@ -667,6 +244,7 @@ Feature: Date filter on collections
               "@type": "Dummy",
               "name": "Dummy #30",
               "alias": "Alias #0",
+              "description": null,
               "dummyDate": null,
               "jsonData": [],
               "relatedDummy": "/related_dummies/30",
@@ -674,80 +252,7 @@ Feature: Date filter on collections
               "relatedDummies": [],
               "name_converted": null
           }
-      ],
-      "hydra:search": {
-          "@type": "hydra:IriTemplate",
-          "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
-          "hydra:variableRepresentation": "BasicRepresentation",
-          "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.name",
-                  "property": "relatedDummy.name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[relatedDummy.symfony]",
-                  "property": "relatedDummy.symfony",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[before]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[after]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              }
-          ]
-      }
+      ]
     }
     """
 
@@ -755,7 +260,7 @@ Feature: Date filter on collections
     Then the response status code should be 200
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json"
-    And the JSON should be equal to:
+    And the JSON should be valid according to this schema:
     """
     {
       "@context": "/contexts/Dummy",
@@ -771,6 +276,7 @@ Feature: Date filter on collections
               "@type": "Dummy",
               "name": "Dummy #28",
               "alias": "Alias #2",
+              "description": null,
               "dummyDate": "2015-04-28T00:00:00+00:00",
               "jsonData": [],
               "relatedDummy": "/related_dummies/28",
@@ -783,6 +289,7 @@ Feature: Date filter on collections
               "@type": "Dummy",
               "name": "Dummy #29",
               "alias": "Alias #1",
+              "description": null,
               "dummyDate": "2015-04-29T00:00:00+00:00",
               "jsonData": [],
               "relatedDummy": "/related_dummies/29",
@@ -795,6 +302,7 @@ Feature: Date filter on collections
               "@type": "Dummy",
               "name": "Dummy #30",
               "alias": "Alias #0",
+              "description": null,
               "dummyDate": null,
               "jsonData": [],
               "relatedDummy": "/related_dummies/30",
@@ -802,79 +310,6 @@ Feature: Date filter on collections
               "relatedDummies": [],
               "name_converted": null
           }
-      ],
-      "hydra:search": {
-          "@type": "hydra:IriTemplate",
-          "hydra:template": "/dummies{?id,name,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
-          "hydra:variableRepresentation": "BasicRepresentation",
-          "hydra:mapping": [
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "id",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "name",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.name",
-                  "property": "relatedDummy.name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummies[]",
-                  "property": "relatedDummies",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[id]",
-                  "property": "id",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[name]",
-                  "property": "name",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "order[relatedDummy.symfony]",
-                  "property": "relatedDummy.symfony",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[before]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "dummyDate[after]",
-                  "property": "dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[before]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              },
-              {
-                  "@type": "IriTemplateMapping",
-                  "variable": "relatedDummy.dummyDate[after]",
-                  "property": "relatedDummy.dummyDate",
-                  "required": false
-              }
-          ]
-      }
+      ]
     }
     """

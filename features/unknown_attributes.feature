@@ -24,6 +24,7 @@ Feature: Ignore unknown attributes
       "@type": "Dummy",
       "name": "Not existing",
       "alias": null,
+      "description": null,
       "dummyDate": null,
       "jsonData": [],
       "relatedDummy": null,

@@ -23,7 +23,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  * @author Théo FIDRY <theo.fidry@gmail.com>
- * @author Vincent CHALAMON <vincentchalamon@gmail.com>
  */
 class OrderFilter extends AbstractFilter
 {

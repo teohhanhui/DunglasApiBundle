@@ -109,7 +109,7 @@ Feature: Create-Retrieve-Update-Delete
       ],
       "hydra:search": {
           "@type": "hydra:IriTemplate",
-          "hydra:template": "\/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
+          "hydra:template": "/dummies{?id,name,alias,description,relatedDummy.name,relatedDummies[],order[id],order[name],order[relatedDummy.symfony],dummyDate[before],dummyDate[after],relatedDummy.dummyDate[before],relatedDummy.dummyDate[after]}",
           "hydra:variableRepresentation": "BasicRepresentation",
           "hydra:mapping": [
               {
