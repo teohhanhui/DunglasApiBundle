@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Dunglas\ApiBundle\Api\IriConverterInterface;
 use Dunglas\ApiBundle\Api\ResourceInterface;
-use Dunglas\ApiBundle\Doctrine\Orm\Util\QueryUtils;
+use Dunglas\ApiBundle\Doctrine\Orm\Util\QueryFactory;
 use Dunglas\ApiBundle\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
@@ -113,7 +113,7 @@ class SearchFilter extends AbstractFilter
                 $parentAlias = $alias;
 
                 foreach ($propertyParts['associations'] as $association) {
-                    $alias = QueryUtils::generateJoinAlias($association);
+                    $alias = QueryFactory::generateJoinAlias($association);
                     $queryBuilder->join(sprintf('%s.%s', $parentAlias, $association), $alias);
                     $parentAlias = $alias;
                 }
@@ -145,8 +145,8 @@ class SearchFilter extends AbstractFilter
                 $value = $this->getFilterValueFromUrl($value);
 
                 $association = $field;
-                $associationAlias = QueryUtils::generateJoinAlias($association);
-                $valueParameter = QueryUtils::generateParameterName($association);
+                $associationAlias = QueryFactory::generateJoinAlias($association);
+                $valueParameter = QueryFactory::generateParameterName($association);
 
                 $queryBuilder
                     ->join(sprintf('%s.%s', $alias, $association), $associationAlias)
@@ -170,8 +170,8 @@ class SearchFilter extends AbstractFilter
                 $values = array_map([$this, 'getFilterValueFromUrl'], $values);
 
                 $association = $field;
-                $associationAlias = QueryUtils::generateJoinAlias($association);
-                $valuesParameter = QueryUtils::generateParameterName($association);
+                $associationAlias = QueryFactory::generateJoinAlias($association);
+                $valuesParameter = QueryFactory::generateParameterName($association);
 
                 $queryBuilder
                     ->join(sprintf('%s.%s', $alias, $association), $associationAlias)
@@ -196,7 +196,7 @@ class SearchFilter extends AbstractFilter
      */
     private function addWhereByStrategy($strategy, QueryBuilder $queryBuilder, $alias, $field, $value)
     {
-        $valueParameter = QueryUtils::generateParameterName($field);
+        $valueParameter = QueryFactory::generateParameterName($field);
 
         switch ($strategy) {
             case null:

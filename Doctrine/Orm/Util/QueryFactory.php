@@ -22,13 +22,12 @@ use Doctrine\ORM\QueryBuilder;
  *
  * @author Teoh Han Hui <teohhanhui@gmail.com>
  */
-abstract class QueryUtils
+abstract class QueryFactory
 {
     /**
      * Generates a unique alias for DQL join.
      *
      * @param string $association
-     * @param string $namespace
      *
      * @return string
      */
@@ -41,7 +40,6 @@ abstract class QueryUtils
      * Generates a unique parameter name for DQL query.
      *
      * @param string $name
-     * @param string $namespace
      *
      * @return string
      */

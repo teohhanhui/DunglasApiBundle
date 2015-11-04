@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Teoh Han Hui <teohhanhui@gmail.com>
  */
-abstract class RequestUtils
+abstract class RequestFactory
 {
     /**
      * Gets a fixed request.
@@ -46,7 +46,7 @@ abstract class RequestUtils
      *
      * @return array
      */
-    public static function parseRequestParams($source)
+    private static function parseRequestParams($source)
     {
         $source = urldecode($source);
 
