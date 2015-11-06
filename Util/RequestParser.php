@@ -17,8 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
  * Utility functions for working with Symfony HttpFoundation request.
  *
  * @author Teoh Han Hui <teohhanhui@gmail.com>
+ * @author Vincent Chalamon <vincentchalamon@gmail.com>
  */
-abstract class RequestFactory
+abstract class RequestParser
 {
     /**
      * Gets a fixed request.
@@ -27,7 +28,7 @@ abstract class RequestFactory
      *
      * @return Request
      */
-    public static function getFixedRequest(Request $request)
+    public static function parseAndDuplicateRequest(Request $request)
     {
         $query = self::parseRequestParams($request->getQueryString());
         $body = self::parseRequestParams(file_get_contents('php://input'));

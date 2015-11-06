@@ -14,7 +14,7 @@ namespace Dunglas\ApiBundle\Doctrine\Orm\Filter;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Dunglas\ApiBundle\Api\ResourceInterface;
-use Dunglas\ApiBundle\Doctrine\Orm\Util\QueryFactory;
+use Dunglas\ApiBundle\Doctrine\Orm\Util\QueryNameGenerator;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -88,7 +88,7 @@ class DateFilter extends AbstractFilter
                 $parentAlias = $alias;
 
                 foreach ($propertyParts['associations'] as $association) {
-                    $alias = QueryFactory::generateJoinAlias($association);
+                    $alias = QueryNameGenerator::generateJoinAlias($association);
                     $queryBuilder->join(sprintf('%s.%s', $parentAlias, $association), $alias);
                     $parentAlias = $alias;
                 }
@@ -138,7 +138,7 @@ class DateFilter extends AbstractFilter
      */
     private function addWhere(QueryBuilder $queryBuilder, $alias, $field, $operator, $value, $nullManagement)
     {
-        $valueParameter = QueryFactory::generateParameterName(sprintf('%s_%s', $field, $operator));
+        $valueParameter = QueryNameGenerator::generateParameterName(sprintf('%s_%s', $field, $operator));
         $baseWhere = sprintf('%s.%s %s :%s', $alias, $field, self::PARAMETER_BEFORE === $operator ? '<=' : '>=', $valueParameter);
 
         if (null === $nullManagement || self::EXCLUDE_NULL === $nullManagement) {
