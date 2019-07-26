@@ -115,47 +115,76 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-/**
- * Defines application features from the specific context.
- */
 final class DoctrineContext implements Context
 {
-    /**
-     * @var EntityManagerInterface|DocumentManager
-     */
-    private $manager;
     private $doctrine;
     private $passwordEncoder;
-    private $schemaTool;
-    private $schemaManager;
-    private $classes;
-
+    private $manager;
     /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
+     * @var bool
      */
+    private static $dbInitialized = false;
+    /**
+     * @var bool
+     */
+    private static $dbNeedsRefresh = true;
+
     public function __construct(ManagerRegistry $doctrine, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->doctrine = $doctrine;
         $this->passwordEncoder = $passwordEncoder;
         $this->manager = $doctrine->getManager();
-        $this->schemaTool = $this->manager instanceof EntityManagerInterface ? new SchemaTool($this->manager) : null;
-        $this->schemaManager = $this->manager instanceof DocumentManager ? $this->manager->getSchemaManager() : null;
-        $this->classes = $this->manager->getMetadataFactory()->getAllMetadata();
+    }
+
+    /**
+     * @BeforeSuite
+     */
+    public static function setup(): void
+    {
+        self::$dbInitialized = false;
+    }
+
+    /**
+     * @BeforeFeature
+     */
+    public static function setupFeature(): void
+    {
+        self::$dbNeedsRefresh = true;
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function before(): void
+    {
+        if (!$this->isOrm()) {
+            return;
+        }
+
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $this->manager;
+
+        self::refreshDatabase($entityManager);
     }
 
     /**
      * @BeforeScenario @createSchema
      */
-    public function createDatabase()
+    public function beforeWithCreateSchema(): void
     {
-        $this->isOrm() && $this->schemaTool->dropSchema($this->classes);
-        $this->isOdm() && $this->schemaManager->dropDatabases();
-        $this->doctrine->getManager()->clear();
-        $this->isOrm() && $this->schemaTool->createSchema($this->classes);
+        if ($this->isOrm()) {
+            /** @var EntityManagerInterface $entityManager */
+            $entityManager = $this->manager;
+
+            self::refreshDatabase($entityManager, true);
+        } else {
+            /** @var DocumentManager $documentManager */
+            $documentManager = $this->manager;
+            $schemaManager = $documentManager->getSchemaManager();
+
+            $schemaManager->dropDatabases();
+            $documentManager->clear();
+        }
     }
 
     /**
@@ -1343,12 +1372,46 @@ final class DoctrineContext implements Context
 
     private function isOrm(): bool
     {
-        return null !== $this->schemaTool;
+        return $this->manager instanceof EntityManagerInterface;
     }
 
     private function isOdm(): bool
     {
-        return null !== $this->schemaManager;
+        return $this->manager instanceof DocumentManager;
+    }
+
+    private static function initDatabase(EntityManagerInterface $entityManager): void
+    {
+        if (self::$dbInitialized) {
+            return;
+        }
+
+        $schemaTool = new SchemaTool($entityManager);
+        $classMetadatas = $entityManager->getMetadataFactory()->getAllMetadata();
+
+        $schemaTool->dropSchema($classMetadatas);
+        $entityManager->clear();
+        $schemaTool->createSchema($classMetadatas);
+
+        self::$dbInitialized = true;
+    }
+
+    private static function refreshDatabase(EntityManagerInterface $entityManager, bool $force = false): void
+    {
+        self::initDatabase($entityManager);
+
+        if (!(self::$dbNeedsRefresh || $force)) {
+            return;
+        }
+
+        $connection = $entityManager->getConnection();
+
+        if ($connection->isTransactionActive()) {
+            $connection->rollback();
+        }
+        $connection->beginTransaction();
+
+        self::$dbNeedsRefresh = false;
     }
 
     /**
